@@ -1,0 +1,4 @@
+[alias]
+    qstash = "!f() { ~/.cool-git-aliases/qstash/git-qstash.sh STASH $@ ;}; f"
+    checkpoint = "!f() { ~/.cool-git-aliases/qstash/git-qstash.sh CHECKPOINT $@ ;}; f"
+    qunstash = "!f() { ~/.cool-git-aliases/qstash/git-qstash.sh UNSTASH $@ ;}; f"

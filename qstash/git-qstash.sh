@@ -1,22 +1,3 @@
-<!-- ### Page Linked from setup-git-aliases.md ### -->
-* `git qstash [<msg>]` - Stash all changes (staged, unstaged, and untracked) in a new commit.  Commit subject will begin with "WIP!" with optional `<msg>` appended.  Following this command, the working copy will be clean.
-* `git checkpoint [<msg>]` - Same functionality as `git qstash`, but commit subject will begin with "CHECKPOINT!"
-* `git qunstash [--all] [--wip-only]` - Unstash a previous qstash.  This will move all qstash-ed changes and staged changes to unstaged/untracked.  The qstash commit will be thrown away and the staging area will be reset.
-    * If the HEAD commit is not a qstash commit, then command will abort
-    * `--all` will roll back consecutive qstash commits, back to first non-qstash commit
-    * qstash commits are determined by the commit message starting with "WIP!" or "CHECKPOINT!"
-        * If `--wip-only` option is used, then only commit messages starting with "WIP!" will be considered qstash commits
-
-## `~/.gitconfig`
-```
-[alias]
-    qstash = "!f() { ~/bin/git-qstash.sh STASH $@ ;}; f"
-    checkpoint = "!f() { ~/bin/git-qstash.sh CHECKPOINT $@ ;}; f"
-    qunstash = "!f() { ~/bin/git-qstash.sh UNSTASH $@ ;}; f"
-```
-
-## `~/bin/git-qstash.sh`
-```bash
 #!/bin/bash
 
 WIP="WIP!"
@@ -111,4 +92,3 @@ if [ "${1}" = "STASH" ] || [ "${1}" = "CHECKPOINT" ]; then
 elif [ "${1}" = "UNSTASH" ]; then
     git-unstash "$@"
 fi
-```

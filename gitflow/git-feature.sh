@@ -1,42 +1,3 @@
-<!-- ### Page Linked from setup-git-aliases.md ### -->
-## Usage
-* `git feature-start <feature>` - create branch `feature` off of upstream/develop
-* `git feature-restart <feature>` - same as feature-start, but set HEAD to origin/&lt;feature&gt;
-* `git feature-push [<push-to-branch>] [-u | --track]` - push to origin
-    * `<push-to-branch>` will be used as the branch to push to
-    * else use existing tracking branch if set AND is not origin/develop, origin/master, upstream/develop, or upstream/master
-    * else use local branch name, chopping off ticket numbers ("-123", "-123-456") and version numbers ("-v2") off the end.
-        * abc -> abc
-        * abc123 -> abc123
-        * abc-123 -> abc
-        * abc-123-456 -> abc
-        * abc-123-v4 -> abc
-        * abc99-123 -> abc99
-    * if `-u` or `--track` is used, the local branch will track the remote branch
-* `git feature-pr [<push-to-branch>]` - execute feature-push, then open Pull Request
-* `git feature-end` - checkout develop (create if necessary), fast forward to upstream/develop, and delete the feature branch
-* `git feature-mergeable [<branch>]` - Check if the current branch is mergeable with another branch
-    * Default to upstream/develop if no `<branch>`
-    * else use local branch `<branch>` if exists
-    * else use upstream/&lt;branch&gt; if exists
-    * else use origin/&lt;branch&gt; if exists
-    * else abort
-    * Command will abort if there are unpushed commits.
-
-## Setup
-### `~/.gitconfig`
-```
-[alias]
-    feature-start = "!f() { ~/bin/git-feature.sh START $1 ;}; f"
-    feature-restart = "!f() { ~/bin/git-feature.sh RESTART $1 ;}; f"
-    feature-push = "!f() { ~/bin/git-feature.sh PUSH $@ ;}; f"
-    feature-pr = "!f() { ~/bin/git-feature.sh PR $@ ;}; f"
-    feature-end = "!f() { ~/bin/git-feature.sh END $1 ;}; f"
-    feature-mergeable = "!f() { ~/bin/git-feature.sh MERGEABLE $1 ;}; f"
-```
-
-### `~/bin/git-feature.sh`
-```bash
 #!/bin/bash
 
 ## Setup:
@@ -290,4 +251,3 @@ elif [ "${1}" = "PUSH" ] || [ "${1}" = "PR" ]; then
 elif [ "${1}" = "MERGEABLE" ]; then
     git-feature-mergeable $2
 fi
-```
