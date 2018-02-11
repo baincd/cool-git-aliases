@@ -24,10 +24,32 @@ git-feature-start() {
         return
     fi
     fetch-all
-    git checkout ${UPSTREAM_REMOTE}/${UPSTREAM_BRANCH} -b $2
-    if [ "${1}" = "RESTART" ]; then
-        git reset --hard ${PUSH_REMOTE}/$2
+
+    if ! [ "${3}" = "" ]; then
+        local BRANCHFROM="${3}"
+    else
+        if [ "${1}" = "START" ]; then
+            local BRANCHFROM="${UPSTREAM_REMOTE}/${UPSTREAM_BRANCH}"
+        elif [ "${1}" = "RESTART" ]; then
+            local BRANCHFROM="${PUSH_REMOTE}/$2"
+        fi
     fi
+
+    if [ "${1}" = "START" ]; then
+        local TR="${UPSTREAM_REMOTE}/${UPSTREAM_BRANCH}"
+    elif [ "${1}" = "RESTART" ]; then
+        if [ "${3}" = "" ]; then
+            local TR="${BRANCHFROM}"
+        elif [[ "${3}" == "${PUSH_REMOTE}/"* ]] || [[ "${A}" == "${UPSTREAM_REMOTE}/"* ]]; then
+            local TR="${3}"
+        else
+            local TR="${PUSH_REMOTE}/${3}"
+        fi
+    fi
+
+    set -e
+    git checkout --no-track ${BRANCHFROM} -b $2
+    git branch -u ${TR}
 }
 
 git-feature-end() {
@@ -243,7 +265,7 @@ fetch-all() {
 }
 
 if [ "${1}" = "START" ] || [ "${1}" = "RESTART" ]; then
-    git-feature-start $1 $2
+    git-feature-start $1 $2 $3
 elif [ "${1}" = "END" ]; then
     git-feature-end $2
 elif [ "${1}" = "PUSH" ] || [ "${1}" = "PR" ]; then

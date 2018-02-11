@@ -14,11 +14,21 @@ These commands require 3 variables to be setup:
 
 *Usage descriptions use values from **Usage Examples**, but will use actual git-feature settings*
 
-* `git feature-start <feature>`
+* `git feature-start <feature> [<branch-from>]`
     * Fetch from all remotes
-    * Then create local branch `<feature>`, branching off of and tracking `<upstream>/<upstreambr>`
-* `git feature-restart <feature>`
-    * Same as feature-start, except branch off of and track `<upstream>/<feature>`
+    * Then create and checkout local branch `<feature>`
+        * IF `<branch-from>` is set, branch from there
+        * ELSE branching off of `<upstream>/<upstreambr>`
+    * Track `<upstream>/<upstreambr>`
+* `git feature-restart <feature>  [<branch-from>]`
+    * Fetch from all remotes
+    * Then create and checkout local branch `<feature>`
+        * IF `<branch-from>` is set, branch from there
+        * ELSE branching from `<origin>/<feature>`
+    * Track
+        * IF `<branch-from>` is set and is a remote branch, track `<branch-from>`
+        * ELSE IF `<branch-from>` is set and is a local branch, track `<origin>/<branch-from>`
+        * ELSE track `<origin>/<feature>`
 * `git feature-push [<push-to-branch>] [-u | --track]` - push checkout branch to <origin>
     * IF `<push-to-branch>` is set, push to `<origin>/<push-to-branch>`
     * ELSE IF local branch is tracking a remote branch that is not `(<origin>|<upstream>)/(<upstreambr>|master)`, use the tracking branch

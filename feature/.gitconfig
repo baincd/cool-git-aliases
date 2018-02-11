@@ -1,6 +1,6 @@
 [alias]
-    feature-start = "!f() { ~/.cool-git-aliases/feature/git-feature.sh START $1 ;}; f"
-    feature-restart = "!f() { ~/.cool-git-aliases/feature/git-feature.sh RESTART $1 ;}; f"
+    feature-start = "!f() { ~/.cool-git-aliases/feature/git-feature.sh START $1 $2 ;}; f"
+    feature-restart = "!f() { ~/.cool-git-aliases/feature/git-feature.sh RESTART $1 $2 ;}; f"
     feature-push = "!f() { ~/.cool-git-aliases/feature/git-feature.sh PUSH $@ ;}; f"
     feature-pr = "!f() { ~/.cool-git-aliases/feature/git-feature.sh PR $@ ;}; f"
     feature-end = "!f() { ~/.cool-git-aliases/feature/git-feature.sh END $1 ;}; f"
