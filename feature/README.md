@@ -16,12 +16,12 @@ These commands require 3 variables to be setup:
 
 * `git feature-start <feature> [<branch-from>]`
     * Fetch from all remotes
-    * Then create and checkout local branch `<feature>`, branching from `<upstream>/<upstreambr>`
+    * Create and checkout local branch `<feature>`, branching from `<upstream>/<upstreambr>`
         * OR branch from `<branch-from>` if set
     * Track `<upstream>/<upstreambr>`
 * `git feature-restart <feature>  [<branch-from>]`
     * Fetch from all remotes
-    * Then create and checkout local branch `<feature>`, branching from `<origin>/<feature>`
+    * Create and checkout local branch `<feature>`, branching from `<origin>/<feature>`
         * OR branch from `<branch-from>` if set
     * Track `<origin>/<feature>`
         * OR track `<branch-from>` or `<origin>/<branch-from>` if `<branch-from>` is set
@@ -38,12 +38,12 @@ These commands require 3 variables to be setup:
     * IF `-u` or `--track` is used, the local branch will track the remote branch
 * `git feature-pr [<push-to-branch>]`
     * Execute feature-push
-    * Then open Pull Request
+    * Open Pull Request
 * `git feature-end`
     * Fetch from all remotes
-    * THEN Checkout local `<upstreambr>` branch and fast forward `<upstream>/<upstreambr>`
+    * Checkout local `<upstreambr>` branch and fast forward `<upstream>/<upstreambr>`
         * OR if local `<upstreambr>` branch doesn't exist, create it branching off of `<upstream>/<upstreambr>`
-    * THEN delete the feature branch
+    * Delete the feature branch
 * `git feature-mergeable [<branch>]` - Check if the current branch is mergeable with `<upstream>/<upstreambr>`
     * OR check against local branch `<branch>` if exists
     * OR check against `<upstream>/<branch>` if exists
