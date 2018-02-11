@@ -1,4 +1,4 @@
-# git qstash
+# Git Qstash
 
 A faster way to stash and unstash changes in git.
 

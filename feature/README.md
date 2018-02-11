@@ -1,8 +1,6 @@
-# Gitflow feature commands
+# Git Feature
 
-git commands designed to make it easier to follow gitflow, and other feature-based workflows.  
-
-Most of these commands are useful even outside of feature-based  workflows.
+git commands designed to make it easier to follow feature-based workflows (such as Gitflow and Trunk Based Development).  
 
 ## Usage
 * `git feature-start <feature>` - create branch `feature` off of upstream/develop
@@ -32,7 +30,7 @@ Most of these commands are useful even outside of feature-based  workflows.
 1) Add to `.gitconfig`
 ```
 [include]
-    path = ~/.cool-git-aliases/gitflow/.gitconfig
+    path = ~/.cool-git-aliases/feature/.gitconfig
 ```
 
 2) Execute from the command line
